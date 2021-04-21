@@ -1,4 +1,4 @@
-import './index.css';
+import './style.css';
 import SearchInput from './SearchInput.js';
 import Select from "./components/Select"
 

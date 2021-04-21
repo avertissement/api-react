@@ -1,6 +1,6 @@
 import React from 'react';
 import BookmarksApp from './bookmarks';
-import BooksAPIApp from './books-api';
+import BooksApp from './books-api/booksApp';
 import DemonymApp from './demonym';
 
 export default function App() {
@@ -10,7 +10,7 @@ export default function App() {
       <hr />
       <BookmarksApp />
       <hr />
-      <BooksAPIApp />
+      <BooksApp />
     </div>
   );
 }
