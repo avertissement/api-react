@@ -1,11 +1,12 @@
 import './index.css';
+import SearchInput from './SearchInput.js';
 
 function BookmarksAPIApp() {
   return (
     <div>
-      stuff here
+      <SearchInput />
     </div>
   );
-}
+};
 
 export default BookmarksAPIApp;
