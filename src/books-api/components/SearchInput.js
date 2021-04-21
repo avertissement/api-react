@@ -5,8 +5,12 @@ export default class SearchInput extends React.Component {
     return (
         <form className="search">
           <label htmlFor="searching">Search: </label>
-          <input id="searching" name="searching" type="text" placeholder="henry" />
+          <input id="searching" name="searching" type="text" placeholder="henry" onChange={e => this.props.keywordChange(e.target.value)} />
         </form>
     );
   };
 };
+
+SearchInput.defaultProps = {
+  keywordChange: null
+}
