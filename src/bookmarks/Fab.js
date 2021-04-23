@@ -1,18 +1,18 @@
-import React, { Component } from 'react';
-import './Fab.css';
+// import React, { Component } from 'react';
+// import './Fab.css';
 
-class Fab extends Component {
+// class Fab extends Component {
 
-  render() {
+//   render() {
 
-    return (
-      <div className="fab" onClick={e => this.props.showForm(true)}>
-        &#43;
-      </div>
-    );
+//     return (
+//       <div className="fab" onClick={e => this.props.showForm(true)}>
+//         &#43;
+//       </div>
+//     );
     
-  }
+//   }
 
-}
+// }
 
-export default Fab;
+// export default Fab;

@@ -3,7 +3,6 @@ import './style.css';
 import SearchInput from './components/SearchInput.js';
 import Select from "./components/Select.js"
 
-
 const bookTypesData = [
   {
     id: 1,
@@ -57,7 +56,7 @@ export default class BookmarksAPIApp extends Component {
     this.state = {
       keyword: null,
       bookTypeSelect: null,
-      printTypeSelect: null
+      printTypeSelect: null,
     };
   };
 
@@ -66,7 +65,6 @@ export default class BookmarksAPIApp extends Component {
       keyword
     });
   };
-
 
   bookTypeChange(bookType) {
     this.setState({
@@ -80,14 +78,30 @@ export default class BookmarksAPIApp extends Component {
     })
   }
 
+  inputChange() {
+    this.setState({
+      resultKeyword: this.state.keyword,
+      resultBookType: this.state.bookTypeSelect,
+      resultPrintType: this.state.printTypeSelect
+    })
+  }
+
   render() {
+
     return (
+
       <div>
         <SearchInput keywordChange={keyword => this.keywordChange(keyword)} />
         <Select choices={bookTypesData} label="Book Type" bookTypeChange={bookType => this.bookTypeChange(bookType)} />
         <Select choices={printTypesData} label="Print Type" printTypeChange={printType => this.printTypeChange(printType)} />
+        <button onClick={() => this.inputChange()}>Show Inputs</button>
+        { this.state.resultKeyword ? <p>{this.state.resultKeyword}</p> : ''}
+        { this.state.resultBookType ? <p>{this.state.resultBookType}</p> : ''}
+        { this.state.resultPrintType ? <p>{this.state.resultPrintType}</p> : ''}
       </div>
-    );
+
+    )
+
   };
 
 };

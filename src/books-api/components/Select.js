@@ -14,7 +14,7 @@ export default function Select({ label, choices, bookTypeChange, printTypeChange
   const changeHandler = (e) => {
     var selected = e.target.value;
     var inQuestion = label;
-    if(inQuestion == "Book Type") {
+    if(inQuestion === "Book Type") {
       bookTypeChange(selected)
     } else {
       printTypeChange(selected)
