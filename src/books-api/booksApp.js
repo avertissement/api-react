@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './style.css';
 import SearchInput from './components/SearchInput.js';
-import Select from "./components/Select.js"
+import Select from "./components/Select.js";
+import Book from './components/Book.js'
 
 const bookTypesData = [
   {
@@ -60,20 +61,6 @@ export default class BookmarksAPIApp extends Component {
     };
   };
 
-  componentDidMount() {
-    fetch('https://www.googleapis.com/books/v1/volumes')
-    .then(response => {
-      if(!response.ok) {
-        throw new Error('Something went wrong, please try again later.')
-      }
-      return response
-    })
-    .then(response => response.json())
-    .then(data => {
-
-    }).catch()
-  }
-
   keywordChange(keyword) {
     this.setState({
       keyword
@@ -92,15 +79,40 @@ export default class BookmarksAPIApp extends Component {
     })
   }
 
-  inputChange() {
-    this.setState({
-      resultKeyword: this.state.keyword,
-      resultBookType: this.state.bookTypeSelect,
-      resultPrintType: this.state.printTypeSelect
+  acquireData() {
+    const options = {
+      method: 'GET',
+      headers: {
+        'Content-Type': "application/json", 
+      }
+    }
+    const theKey = 'AIzaSyC2D-2NiBvyzxBVPSEa5Sbi2WlOCX6mFgw'
+    fetch(`https://www.googleapis.com/books/v1/volumes?q=${this.state.keyword}&key=${theKey}&printType=${this.state.printTypeSelect}&filter=${this.state.bookTypeSelect}`, options)
+    .then(response => {
+      if(!response.ok) {
+        throw new Error('Something went wrong, please try again later.')
+      }
+      return response
+    })
+    .then(response => response.json())
+    .then(data => {
+      this.setState({
+        dataResults: data
+    }, () => console.log(this.state.dataResults))
+    }).catch(err => {
+      this.setState({
+        error: err.message
+      })
     })
   }
 
   render() {
+
+    const go = this.state.dataResults && this.state.dataResults.items ? 
+    this.state.dataResults.items.map((item, index) => {
+      return <Book key={index} id={index} display={item} />
+    }) : 
+    '';
 
     return (
 
@@ -108,10 +120,8 @@ export default class BookmarksAPIApp extends Component {
         <SearchInput keywordChange={keyword => this.keywordChange(keyword)} />
         <Select choices={bookTypesData} label="Book Type" bookTypeChange={bookType => this.bookTypeChange(bookType)} />
         <Select choices={printTypesData} label="Print Type" printTypeChange={printType => this.printTypeChange(printType)} />
-        <button onClick={() => this.inputChange()}>Show Inputs</button>
-        { this.state.resultKeyword ? <p>{this.state.resultKeyword}</p> : ''}
-        { this.state.resultBookType ? <p>{this.state.resultBookType}</p> : ''}
-        { this.state.resultPrintType ? <p>{this.state.resultPrintType}</p> : ''}
+        <button onClick={() => this.acquireData()}>Acquire Data</button>
+        {go}
       </div>
 
     )
