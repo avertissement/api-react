@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './style.css';
+import './BooksApp.css';
 import SearchInput from './components/SearchInput.js';
 import Select from "./components/Select.js";
 import Book from './components/Book.js'
@@ -116,12 +116,28 @@ export default class BookmarksAPIApp extends Component {
 
     return (
 
-      <div>
+      <div className="books-app">
+
+        <article>
         <SearchInput keywordChange={keyword => this.keywordChange(keyword)} />
+        </article>
+
+        <article>
         <Select choices={bookTypesData} label="Book Type" bookTypeChange={bookType => this.bookTypeChange(bookType)} />
+        </article>
+
+        <article>
         <Select choices={printTypesData} label="Print Type" printTypeChange={printType => this.printTypeChange(printType)} />
+        </article>
+
+        <article>
         <button onClick={() => this.acquireData()}>Acquire Data</button>
+        </article>
+
+        <article>
         {go}
+        </article>
+
       </div>
 
     )

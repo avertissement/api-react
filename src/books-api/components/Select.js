@@ -23,7 +23,7 @@ export default function Select({ label, choices, bookTypeChange, printTypeChange
 
   return (
     <div>
-      <label>{label}</label>
+      <label>{label}: </label>
       <select onChange={e => changeHandler(e)}>
         {options}
       </select>
