@@ -60,6 +60,20 @@ export default class BookmarksAPIApp extends Component {
     };
   };
 
+  componentDidMount() {
+    fetch('https://www.googleapis.com/books/v1/volumes')
+    .then(response => {
+      if(!response.ok) {
+        throw new Error('Something went wrong, please try again later.')
+      }
+      return response
+    })
+    .then(response => response.json())
+    .then(data => {
+
+    }).catch()
+  }
+
   keywordChange(keyword) {
     this.setState({
       keyword
